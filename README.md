@@ -9,6 +9,20 @@ A Machine Learning web application that predicts laptop prices based on laptop s
 🔗 **Live Website:**  
 https://laptop-price-intelligence.onrender.com
 
+
+# 📸 Screenshots
+
+## Home Page
+
+![Home Page](assets/home.png)
+
+---
+
+## Prediction Result
+
+![Prediction Result](assets/prediction.png)
+
+
 ## 💻 Source Code
 
 🔗 **GitHub Repository:**  
@@ -199,3 +213,8 @@ Aspiring Software Engineer | Machine Learning Enthusiast
 # ⭐ Support
 
 If you found this project useful, consider giving it a ⭐ on GitHub.
+
+
+
+
+
