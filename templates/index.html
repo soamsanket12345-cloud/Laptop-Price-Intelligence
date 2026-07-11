@@ -2,8 +2,12 @@
 <html>
 
 <head>
+
     <title>Laptop Price Intelligence</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
@@ -12,92 +16,44 @@
 
 <h1>Laptop Price Intelligence</h1>
 
-<p class="subtitle">
-Predict Laptop Prices using Machine Learning
-</p>
-
 <form action="/predict" method="POST">
 
-<label>Company</label>
-<select name="company">
-{% for company in companies %}
-<option value="{{ company }}">{{ company }}</option>
-{% endfor %}
-</select>
+<input
+type="number"
+name="ram"
+placeholder="RAM (GB)"
+required>
 
-<br><br>
+<input
+type="number"
+step="0.01"
+name="weight"
+placeholder="Weight (kg)"
+required>
 
-<label>Laptop Type</label>
-<select name="typename">
-{% for type in types %}
-<option value="{{ type }}">{{ type }}</option>
-{% endfor %}
-</select>
-
-<br><br>
-
-<label>RAM (GB)</label>
-<input type="number" name="ram" required>
-
-<br><br>
-
-<label>Weight (kg)</label>
-<input type="number" step="0.01" name="weight" required>
-
-<br><br>
-
-<label>Screen Size (Inches)</label>
-<input type="number" step="0.1" name="inches" required>
-
-<br><br>
-
-<label>CPU Brand</label>
-<select name="cpu">
-{% for cpu in cpus %}
-<option value="{{ cpu }}">{{ cpu }}</option>
-{% endfor %}
-</select>
-
-<br><br>
-
-<label>GPU Brand</label>
-<select name="gpu">
-{% for gpu in gpus %}
-<option value="{{ gpu }}">{{ gpu }}</option>
-{% endfor %}
-</select>
-
-<br><br>
-
-<label>SSD (GB)</label>
-<input type="number" name="ssd" value="256">
-
-<br><br>
-
-<label>HDD (GB)</label>
-<input type="number" name="hdd" value="0">
-
-<br><br>
-
-<label>Operating System</label>
-<select name="os">
-{% for os in os_list %}
-<option value="{{ os }}">{{ os }}</option>
-{% endfor %}
-</select>
-
-<br><br>
+<input
+type="number"
+step="0.1"
+name="inches"
+placeholder="Screen Size (Inches)"
+required>
 
 <button type="submit">
+
 Predict Price
+
 </button>
 
 </form>
 
 {% if prediction_text %}
+
 <div class="result">
-    {{ prediction_text }}
+
+{{ prediction_text }}
+
 </div>
+
 {% endif %}
 
 </div>
@@ -105,3 +61,5 @@ Predict Price
 </body>
 
 </html>
+
+
