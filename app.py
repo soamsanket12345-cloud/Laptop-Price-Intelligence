@@ -7,65 +7,67 @@ app = Flask(__name__)
 # Load trained model
 model = joblib.load("model.pkl")
 
-# Load dataset for dropdowns
-df = pd.read_csv("data/final_laptop_data.csv")
-
 
 @app.route("/")
 def home():
-
-    companies = sorted(df["Company"].unique())
-    types = sorted(df["TypeName"].unique())
-    cpus = sorted(df["CPU Brand"].unique())
-    gpus = sorted(df["GPU Brand"].unique())
-    os_list = sorted(df["OS"].unique())
-
-    return render_template(
-        "index.html",
-        companies=companies,
-        types=types,
-        cpus=cpus,
-        gpus=gpus,
-        os_list=os_list
-    )
+    return render_template("index.html")
 
 
 @app.route("/predict", methods=["POST"])
 def predict():
+    try:
+        # Get user input
+        company = request.form["company"]
+        typename = request.form["typename"]
 
-    data = pd.DataFrame({
+        ram = int(request.form["ram"])
+        weight = float(request.form["weight"])
+        inches = float(request.form["inches"])
 
-        "Company": [request.form["company"]],
-        "TypeName": [request.form["typename"]],
-        "Ram": [int(request.form["ram"])],
-        "Weight": [float(request.form["weight"])],
-        "Inches": [float(request.form["inches"])],
-        "CPU Brand": [request.form["cpu"]],
-        "GPU Brand": [request.form["gpu"]],
-        "SSD": [int(request.form["ssd"])],
-        "HDD": [int(request.form["hdd"])],
-        "OS": [request.form["os"]]
+        cpu = request.form["cpu"]
+        gpu = request.form["gpu"]
 
-    })
+        ssd = int(request.form["ssd"])
+        hdd = int(request.form["hdd"])
 
-    prediction = model.predict(data)
+        os_name = request.form["os"]
 
-    companies = sorted(df["Company"].unique())
-    types = sorted(df["TypeName"].unique())
-    cpus = sorted(df["CPU Brand"].unique())
-    gpus = sorted(df["GPU Brand"].unique())
-    os_list = sorted(df["OS"].unique())
+        # Create DataFrame
+        data = pd.DataFrame({
+            "Company": [company],
+            "TypeName": [typename],
+            "Ram": [ram],
+            "Weight": [weight],
+            "Inches": [inches],
+            "CPU Brand": [cpu],
+            "GPU Brand": [gpu],
+            "SSD": [ssd],
+            "HDD": [hdd],
+            "OS": [os_name]
+        })
 
+        # Predict
+        prediction = model.predict(data)[0]
+
+        return render_template(
+            "index.html",
+            prediction_text=f" Estimated Laptop Price: ₹ {prediction:,.2f}"
+        )
+
+    except Exception as e:
+        return render_template(
+            "index.html",
+            prediction_text=f" Error: {str(e)}"
+        )
+
+
+@app.errorhandler(404)
+def page_not_found(error):
     return render_template(
         "index.html",
-        prediction_text=f"Estimated Laptop Price: ₹{prediction[0]:,.2f}",
-        companies=companies,
-        types=types,
-        cpus=cpus,
-        gpus=gpus,
-        os_list=os_list
-    )
+        prediction_text=" Page Not Found"
+    ), 404
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(debug=True)

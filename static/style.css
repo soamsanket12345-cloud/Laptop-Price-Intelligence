@@ -1,60 +1,153 @@
-body{
-    margin:0;
-    padding:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:linear-gradient(135deg,#0f172a,#2563eb);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+/* ===========================
+   Professional Upgrade v2.1
+=========================== */
+
+label{
+    display:block;
+    margin-bottom:8px;
+    margin-top:12px;
+    font-weight:600;
+    color:#f8fafc;
 }
 
-.container{
-    background:white;
-    width:450px;
-    padding:35px;
-    border-radius:15px;
-    box-shadow:0 15px 35px rgba(0,0,0,0.3);
-    text-align:center;
-}
-
-h1{
-    color:#1e3a8a;
-    margin-bottom:20px;
-}
-
-input{
-    width:90%;
-    padding:12px;
-    margin:10px 0;
-    border-radius:8px;
-    border:1px solid #ccc;
-    font-size:16px;
+input:focus,
+select:focus{
+    outline:none;
+    border:2px solid #38bdf8;
+    box-shadow:0 0 15px rgba(56,189,248,.35);
 }
 
 button{
-    width:95%;
-    padding:14px;
+    margin-top:15px;
+}
+
+.reset-btn{
+    width:100%;
+    margin-top:12px;
+    padding:15px;
     border:none;
-    border-radius:8px;
-    background:#2563eb;
+    border-radius:12px;
+    background:#475569;
     color:white;
-    font-size:18px;
+    font-size:16px;
     cursor:pointer;
     transition:.3s;
 }
 
-button:hover{
-    background:#1d4ed8;
-    transform:scale(1.03);
+.reset-btn:hover{
+    background:#334155;
 }
 
 .result{
-    margin-top:25px;
-    background:#dcfce7;
-    color:#166534;
-    padding:15px;
-    border-radius:8px;
+    animation:pop .4s ease;
+}
+
+@keyframes pop{
+
+    0%{
+        transform:scale(.8);
+        opacity:0;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:1;
+    }
+
+}
+
+.about{
+
+    margin-top:35px;
+
+    background:rgba(255,255,255,.10);
+
+    padding:20px;
+
+    border-radius:15px;
+
+}
+
+.about h2{
+
+    margin-bottom:12px;
+
     font-size:22px;
-    font-weight:bold;
+
+}
+
+.about p{
+
+    line-height:1.7;
+
+    color:#e2e8f0;
+
+}
+
+.tech{
+
+    margin-top:25px;
+
+}
+
+.tech h2{
+
+    margin-bottom:15px;
+
+}
+
+.badges{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.badges span{
+
+    background:white;
+
+    color:#1e293b;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.footer{
+
+    border-top:1px solid rgba(255,255,255,.2);
+
+    padding-top:20px;
+
+    margin-top:35px;
+
+    line-height:1.8;
+
+}
+
+@media(max-width:600px){
+
+.container{
+
+    width:100%;
+
+    padding:25px;
+
+}
+
+h1{
+
+    font-size:26px;
+
+}
+
 }
